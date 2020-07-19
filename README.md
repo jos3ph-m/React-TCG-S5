@@ -37,6 +37,8 @@ if (this.state.showPersons) {
 }
 ```
 
+---
+
 ## Settings Class Names Dynamically
 
 Here we can set class names dynamically using a simple if check.
@@ -71,4 +73,89 @@ if (this.state.persons.length <= 1) {
 <p style={{ fontSize: "20px" }} className={classes.join(" ")}>
   And I was built for gaining a more developed grasp of React
 </p>
+```
+
+---
+
+## Adding and Using Radium
+
+To install:
+
+```console
+npm install --save radium
+```
+
+Import in app:
+
+```javascript
+import Radium from "radium";
+```
+
+Wrap app with Radium:
+
+```javascript
+export default Radium(App);
+```
+
+We can then add our pseudo class to our style variable:
+
+```javascript
+":hover": {
+        backgroundColor: "lightgreen",
+        color: "black",
+      },
+```
+
+To add media queries:
+
+```javascript
+const style = {
+  "@media (min-width: 500px)": {
+    width: "450px",
+  },
+};
+```
+
+---
+
+## Adding and Using Styled Components
+
+To install:
+
+```console
+npm install --save styled-components
+```
+
+To import:
+
+```javascript
+import styled from "styled-components";
+```
+
+Utilization - remember it's css syntax rather than javascript:
+
+```javascript
+const StyledDiv = styled.div`
+  width: 60%;
+  margin: 16px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 16px;
+  text-align: center;
+
+  @media (min-width: 500px) {
+    width: 450px;
+  }
+`;
+```
+
+```javascript
+<StyledDiv>
+  <p onClick={props.click}>
+    I'm {name} and I'm {age}... I'm from the Person component and here I am
+    generating a random number: {Math.floor(Math.random() * 100)}
+  </p>
+  <p>{children}</p>
+  <input type="text" onChange={props.changed} value={props.name} />
+</StyledDiv>
 ```
