@@ -2,6 +2,8 @@
 
 ## Setting Styles Dynamically
 
+Here we will change the background color from green to red depending on if the button has been clicked:
+
 ```javascript
 const style = {
   backgroundColor: "green",
@@ -33,4 +35,40 @@ if (this.state.showPersons) {
   );
   style.backgroundColor = "red";
 }
+```
+
+## Settings Class Names Dynamically
+
+Here we can set class names dynamically using a simple if check.
+
+We've set the following classes in our App.css:
+
+```css
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+```
+
+Inside of our app, we're using the following:
+
+```javascript
+const classes = [];
+
+if (this.state.persons.length <= 2) {
+  classes.push("red");
+}
+
+if (this.state.persons.length <= 1) {
+  classes.push("bold");
+}
+```
+
+```javascript
+<p style={{ fontSize: "20px" }} className={classes.join(" ")}>
+  And I was built for gaining a more developed grasp of React
+</p>
 ```
