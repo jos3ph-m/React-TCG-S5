@@ -159,3 +159,125 @@ const StyledDiv = styled.div`
   <input type="text" onChange={props.changed} value={props.name} />
 </StyledDiv>
 ```
+
+---
+
+## CSS Modules
+
+#### Getting set up.
+
+Make sure to add and commit all changes first:
+
+```console
+git add .
+git commit -m 'Your message here'
+```
+
+Now we can eject:
+
+```console
+npm run eject
+```
+
+Locate the file webpack.config.dev.js and ensure yours lists as follows:
+
+```javascript
+test: /\.css$/,
+use: [
+  require.resolve('style-loader'),
+  {
+    loader: require.resolve('css-loader'),
+    options: {
+      importLoaders: 1,
+      modules: true,
+      localIdentName: '[name]__[local]__[hash:base64:5]'
+    },
+```
+
+We'll also want to add the following lines to the webpack.config.prod.js file:
+
+```javascript
+modules: true,
+localIdentName: '[name]__[local]__[hash:base64:5]'
+```
+
+Now we'll import the classes from our App.css file:
+
+```javascript
+import classes from "./App.css";
+```
+
+Now we can assign those classes using the following syntax:
+
+```javascript
+<button className={classes.Button} onClick={this.togglePersonsHandler}>
+  Toggle Persons
+</button>
+```
+
+Alternatively we can do the following. Inside of App.css:
+
+```css
+.App {
+  text-align: center;
+}
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.App button {
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.App button:hover {
+  background-color: lightgreen;
+  color: black;
+}
+
+.App button.Red {
+  background-color: red;
+}
+
+.App button.Red:hover {
+  background-color: salmon;
+}
+```
+
+```javascript
+let btnClass = [classes.Button];
+if (this.state.showPersons) {
+  persons = (
+    <div>
+      {this.state.persons.map((person, index) => {
+        return (
+          <Person
+            click={() => this.deletePersonHandler(index)}
+            name={person.name}
+            age={person.age}
+            key={person.id}
+            changed={(e) => this.nameChangedHandler(e, person.id)}
+          />
+        );
+      })}
+    </div>
+  );
+  btnClass = classes.Red;
+}
+```
+
+```javascript
+<button className={btnClass} onClick={this.togglePersonsHandler}>
+  Toggle Persons
+</button>
+```
